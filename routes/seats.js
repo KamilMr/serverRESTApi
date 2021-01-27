@@ -18,12 +18,21 @@ router.route('/seats/:id').get((req, res, next) => {
     }
 });
 
-// [DONE]
+// [WORKING]
 router.route('/seats').post((req, res) => {
     const consumer = req.body;
-    consumer.id = uuidv4();
-    dane.db.seats.push(consumer);
-    res.send('Customer: '+ consumer.author + ' ' +'is added to the database with id number: ' + consumer.id);
+    const isntAvailible = dane.db.seats.some((consumer) => {
+        consumer.seat && consumer.day;
+        console.log(consumer.seat);
+
+    })
+    if(isntAvailible == false) {
+        consumer.id = uuidv4();
+        dane.db.seats.push(consumer);
+        res.send('Customer: '+ consumer.author + ' ' +'is added to the database with id number: ' + consumer.id);
+    } else {
+        res.send('Error')
+    }
 
 });
 
