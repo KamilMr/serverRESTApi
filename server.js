@@ -18,9 +18,9 @@ const testimonials = require('./routes/testimionals');
 const concerts = require('./routes/concerts');
 const seats = require('./routes/seats');
 
-app.use('/api', testimonials); // add post routes to server
-app.use('/api', concerts); // add post routes to server
-app.use('/api', seats); // add post routes to server
+app.use('/api', testimonials); 
+app.use('/api', concerts); 
+app.use('/api', seats); 
 
 
 // [DONE]

@@ -15,7 +15,6 @@ router.route('/seats/:id').get((req, res, next) => {
         if(id == dane.db.seats[x].id){
             res.json(dane.db.seats[x]);
         }
-        // next();
     }
 });
 
