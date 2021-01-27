@@ -15,7 +15,7 @@ router.route('/testimonials/:id').get((req, res, next) => {
         if(id == dane.db.testimonials[x].id){
             res.json(dane.db.testimonials[x]);
         }
-        // next();
+        // next(); 
     }
 });
 
