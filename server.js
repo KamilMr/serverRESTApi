@@ -23,14 +23,14 @@ const concerts = require('./routes/concerts');
 const seats = require('./routes/seats');
 
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build/index.html'));
+});
 
 app.use('/api', testimonials); 
 app.use('/api', concerts); 
 app.use('/api', seats); 
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'));
-});
 
 // [DONE]
 app.use((req, res) => {
