@@ -11,16 +11,14 @@ router.route('/testimonials').get((req, res) => {
 //[DONE]
 router.route('/testimonials/:id').get((req, res, next) => {
     const id = req.params.id;
-    for(let x in dane.db.testimonials){
-        if(id == dane.db.testimonials[x].id){
-            res.json(dane.db.testimonials[x]);
-        }
-        // next(); 
+    let finded = dane.db.testimonials.find(element => element.id == id);
+    res.json(finded)
+        next(); 
     }
-});
+);
 
-//[DONNE  # ISSUE WITH LINK]
-router.route('/testimonial/random').get((req, res) => {
+//[DONNE]
+router.route('/testimonials/random').get((req, res) => {
     const generateRandomId = dane.db.testimonials[Math.floor(Math.random() * dane.db.testimonials.length)];
     res.json(generateRandomId);
 });

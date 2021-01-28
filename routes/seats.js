@@ -22,10 +22,9 @@ router.route('/seats/:id').get((req, res, next) => {
 router.route('/seats').post((req, res) => {
     const consumer = req.body;
     const isntAvailible = dane.db.seats.some(item => {
-        item.seat == consumer.seat && item.day == consumer.day;
-        console.log(consumer.seat);
-
+        return item.seat == consumer.seat && item.day == consumer.day;
     })
+    
     if(!isntAvailible) {
         consumer.id = uuidv4();
         dane.db.seats.push(consumer);
