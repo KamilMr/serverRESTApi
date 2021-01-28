@@ -18,7 +18,7 @@ router.route('/seats/:id').get((req, res, next) => {
     }
 });
 
-// [WORKING]
+// [WORKING - CHECKING]
 router.route('/seats').post((req, res) => {
     const consumer = req.body;
     const isntAvailible = dane.db.seats.some(item => {
