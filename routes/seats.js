@@ -21,12 +21,12 @@ router.route('/seats/:id').get((req, res, next) => {
 // [WORKING]
 router.route('/seats').post((req, res) => {
     const consumer = req.body;
-    const isntAvailible = dane.db.seats.some((consumer) => {
-        consumer.seat && consumer.day;
+    const isntAvailible = dane.db.seats.some(item => {
+        item.seat == consumer.seat && item.day == consumer.day;
         console.log(consumer.seat);
 
     })
-    if(isntAvailible == false) {
+    if(!isntAvailible) {
         consumer.id = uuidv4();
         dane.db.seats.push(consumer);
         res.send('Customer: '+ consumer.author + ' ' +'is added to the database with id number: ' + consumer.id);
