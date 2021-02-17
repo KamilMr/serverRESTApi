@@ -28,6 +28,7 @@ router.route('/seats').post((req, res) => {
     if(!isntAvailible) {
         consumer.id = uuidv4();
         dane.db.seats.push(consumer);
+        req.io.emit('seatsUpdated', dane.db.seats)
         res.send('Customer: '+ consumer.author + ' ' +'is added to the database with id number: ' + consumer.id);
     } else {
         res.send('Error')

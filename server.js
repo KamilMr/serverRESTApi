@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const router = express.Router();
 const dane = require('./db');
 const path = require('path');
+const socket = require('socket.io');
 
 
 
@@ -22,11 +23,15 @@ const testimonials = require('./routes/testimionals');
 const concerts = require('./routes/concerts');
 const seats = require('./routes/seats');
 
-
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 app.use('/api', testimonials); 
 app.use('/api', concerts); 
 app.use('/api', seats); 
+
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
@@ -34,10 +39,21 @@ app.get('*', (req, res) => {
 
 // [DONE]
 app.use((req, res) => {
-    res.status(404).send('404 not found...');
-  });
+  res.status(404).send('404 not found...');
+});
 
-  app.listen(process.env.PORT || 8000, () => {
-    console.log('Server is running on port: 8000');
-  });
-  
+const server = app.listen(process.env.PORT || 8000, () => {
+  console.log('Server is running on port: 8000');
+});
+const io = socket(server);
+
+
+
+
+io.on('connection', (socket) =>{
+  console.log('new socket: ' + socket.id);
+  // socket.on('seatsUpdated' (data) => {
+    
+  // })
+  socket.on('disconnect', ()=> console.log('disconected '+ socket.id));
+})
