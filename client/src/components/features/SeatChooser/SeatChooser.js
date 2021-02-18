@@ -8,11 +8,11 @@ const ENDPOINT = 'http://localhost:8000';
 class SeatChooser extends React.Component {
   
   componentDidMount() {
-    const { loadSeats} = this.props;
+    const { loadSeats, loadSeatsData} = this.props;
     console.log(ENDPOINT);
     this.socket = io(ENDPOINT);
     this.socket.on('connection', () => console.log('working'));
-    this.socket.on('seatsUpdated', (seats) => console.log(seats));
+    this.socket.on('seatsUpdated', (seats) => loadSeatsData(seats));
     loadSeats();
     setInterval(loadSeats, 120000)
   }
