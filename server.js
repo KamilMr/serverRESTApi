@@ -52,8 +52,5 @@ const io = socket(server);
 
 io.on('connection', (socket) =>{
   console.log('new socket: ' + socket.id);
-  // socket.on('seatsUpdated' (data) => {
-    
-  // })
   socket.on('disconnect', ()=> console.log('disconected '+ socket.id));
 })
