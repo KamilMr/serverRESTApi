@@ -24,26 +24,15 @@ class SeatChooser extends React.Component {
     const { chosenDay, seats } = this.props;
     const freeSeats = document.getElementById('freeSeats')
 
-    let one = 50;
-    let two = 50;
-    let three = 50;
+    let availableSeats = 50;
 
     if (seats != '') {
       seats.map((seat) => {
-        if (seat.day === 1 && chosenDay === 1) {
-          one = one - 1;
-          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + one + '/50</h6></div>'
-        }
-        if (seat.day === 2 && chosenDay === 2) {
-          two = two - 1;
-          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + two + '/50</h6></div>'
-        }
-        if (chosenDay === 3) {
-          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + three + '/50</h6></div>'
-        }
-        if (seat.day === 3 && chosenDay === 3) {
-          three = three -1;
-          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + three + '/50</h6></div>'
+        if (seat.day === chosenDay) {
+          availableSeats = availableSeats - 1;
+          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + availableSeats + '/50</h6></div>'
+        }else if(seat.day !== chosenDay) {
+          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + availableSeats + '/50</h6></div>'
         }
       })
     }
