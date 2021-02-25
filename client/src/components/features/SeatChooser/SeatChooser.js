@@ -30,9 +30,9 @@ class SeatChooser extends React.Component {
       seats.map((seat) => {
         if (seat.day === chosenDay) {
           availableSeats = availableSeats - 1;
-          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + availableSeats + '/50</h6></div>'
+          freeSeats.innerHTML = '<div> <h5>Available Spots</h5><h6> day  ' + chosenDay + ': ' + availableSeats + '/50</h6></div>'
         }else if(seat.day !== chosenDay) {
-          freeSeats.innerHTML = '<div> <h5>Available</h5><h6> day  ' + chosenDay + ': ' + availableSeats + '/50</h6></div>'
+          freeSeats.innerHTML = '<div> <h5>Available Spots</h5><h6> day  ' + chosenDay + ': ' + availableSeats + '/50</h6></div>'
         }
       })
     }
