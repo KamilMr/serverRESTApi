@@ -1,9 +1,8 @@
-const Testimonial = require('../models/testimonials.model');
-const { v4: uuidv4 } = require('uuid');
+const Seat = require('../models/seats.model');
 
 exports.get = async (req, res) => {
     try {
-        res.json(await Testimonial.find());
+        res.json(await Seat.find());
     } catch (err) {
         res.json({message: err});
     }
@@ -11,7 +10,7 @@ exports.get = async (req, res) => {
 
 exports.getId = async (req, res) => {
     try {
-        const doc = await Testimonial.findById(req.params.id);
+        const doc = await Seat.findById(req.params.id);
         (!doc) ? res.status(404).json({message: 'Not Found'}) : res.json(doc);
     } catch (err) {
         res.status(500).json({message: err});
@@ -20,9 +19,9 @@ exports.getId = async (req, res) => {
 
 exports.getRandom = async (req, res) => {
     try {
-        const count = await Testimonial.countDocuments();
+        const count = await Seat.countDocuments();
         const rand = Math.floor(Math.random() * count);
-        const doc = await Testimonial.findOne().skip(rand);
+        const doc = await Seat.findOne().skip(rand);
         (!doc) ? res.status(404).json({message: 'Not Found'}) : res.json(doc);
       } catch (err) {
         res.status(500).json({message: err});
@@ -31,10 +30,10 @@ exports.getRandom = async (req, res) => {
 
 exports.post = async (req, res) => {
     try {
-        const { author, text, id } = req.body;
-        const newTestimonials = new Testimonial({id: id, author: author, text: text});
-        newTestimonials.save();
-        res.json({message: newTestimonials})
+        const { id, day, seat, client, email } = req.body;
+        const newSeat = new Seat({id: id, day: day, seat: seat, client: client, email: email});
+        newSeat.save();
+        res.json({message: newSeat})
     } catch (err) {
         res.status(500).json({message: err});
     }
@@ -42,11 +41,13 @@ exports.post = async (req, res) => {
 
 exports.put = async (req, res) => {
     try {
-        const { id, author, text } = req.body;
-        const doc = await Testimonial.findById(req.params.id);
+        const { id, day, seat, client, email } = req.body;
+        const doc = await Seat.findById(req.params.id);
         if(doc){
-          doc.author = author;
-          doc.text = text;
+          doc.day = day;
+          doc.seat = seat;
+          doc.client = client;
+          doc.email = email;
           await doc.save();
           res.json({message: 'Ok'});
         }
@@ -58,9 +59,9 @@ exports.put = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
-        const doc = await Testimonial.findById(req.params.id);
+        const doc = await Seat.findById(req.params.id);
         if(doc){
-          await Testimonial.deleteOne({ _id: req.params.id});
+          await Seat.deleteOne({ _id: req.params.id});
           res.json({message: 'Deleted'})
         } else res.status(404).json({ message: 'Not found...' });
       } catch (err) {
