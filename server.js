@@ -44,7 +44,7 @@ app.use((req, res) => {
 });
 
 // connects our backend code with the database
-mongoose.connect('mongodb+srv://master:master1@cluster0.z6bd2.mongodb.net/cluster0?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://master:master1@cluster0.z6bd2.mongodb.net/NewWaveFestival?retryWrites=true&w=majority', { useNewUrlParser: true });
 const db = mongoose.connection;
 
 const server = app.listen(process.env.PORT || 8000, () => {

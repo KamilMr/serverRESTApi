@@ -30,8 +30,8 @@ exports.getRandom = async (req, res) => {
 
 exports.post = async (req, res) => {
     try {
-        const { id, day, seat, client, email } = req.body;
-        const newSeat = new Seat({id: id, day: day, seat: seat, client: client, email: email});
+        const { day, seat, client, email } = req.body;
+        const newSeat = new Seat({day: day, seat: seat, client: client, email: email});
         newSeat.save();
         res.json({message: newSeat})
     } catch (err) {
