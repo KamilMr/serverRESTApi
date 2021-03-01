@@ -6,6 +6,7 @@ const dane = require('./db');
 const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
+const aws = require('aws-sdk');
 
 
 
@@ -43,13 +44,21 @@ app.use((req, res) => {
   res.status(404).send('404 not found...');
 });
 
+let s3 = new aws.S3({
+  accessKeyId: process.env.username,
+  secretAccessKey: process.env.password
+});
+
+
 // connects our backend code with the database
-mongoose.connect('mongodb+srv://master:master1@cluster0.z6bd2.mongodb.net/NewWaveFestival?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://'+accessKeyId+':'+secretAccessKey+'@cluster0.z6bd2.mongodb.net/NewWaveFestival?retryWrites=true&w=majority', { useNewUrlParser: true });
 const db = mongoose.connection;
+
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port: 8000');
 });
+
 const io = socket(server);
 
 db.once('open', () => {
