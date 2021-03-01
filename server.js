@@ -44,14 +44,14 @@ app.use((req, res) => {
   res.status(404).send('404 not found...');
 });
 
-let s3 = new aws.S3({
-  accessKeyId: process.env.username,
-  secretAccessKey: process.env.password
-});
+// let s3 = new aws.S3({
+//   accessKeyId: process.env.S3_USER,
+//   secretAccessKey: process.env.S3_PASSWOR
+// });
 
 
 // connects our backend code with the database
-mongoose.connect('mongodb+srv://'+accessKeyId+':'+secretAccessKey+'@cluster0.z6bd2.mongodb.net/NewWaveFestival?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://:master1@cluster0.z6bd2.mongodb.net/NewWaveFestival?retryWrites=true&w=majority', { useNewUrlParser: true });
 const db = mongoose.connection;
 
 
