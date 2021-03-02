@@ -1,4 +1,6 @@
 const Seat = require('../models/seats.model');
+var sanitize = require('mongo-sanitize');
+
 
 exports.get = async (req, res) => {
     try {
@@ -30,7 +32,8 @@ exports.getRandom = async (req, res) => {
 
 exports.post = async (req, res) => {
     try {
-        const { day, seat, client, email } = req.body;
+      const clean = sanitize(req.body);
+      const { day, seat, client, email } = clean;
         const newSeat = new Seat({day: day, seat: seat, client: client, email: email});
         newSeat.save();
         res.json({message: newSeat})

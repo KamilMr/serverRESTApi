@@ -1,0 +1,21 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.19.0
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  SNYK-JS-MQUERY-1050858:
+    - mongoose > mquery:
+        reason: for testing
+        expires: '2021-04-01T20:29:01.912Z'
+  SNYK-JS-MONGOOSE-472486:
+    - mongoose:
+        reason: for testing
+        expires: '2021-04-01T20:29:01.912Z'
+  SNYK-JS-ENGINEIO-1056749:
+    - socket.io > engine.io:
+        reason: for testing
+        expires: '2021-04-01T20:29:01.912Z'
+  SNYK-JS-SOCKETIO-1024859:
+    - socket.io:
+        reason: for testing
+        expires: '2021-04-01T20:29:01.912Z'
+patch: {}

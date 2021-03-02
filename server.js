@@ -7,12 +7,14 @@ const path = require('path');
 const socket = require('socket.io');
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');
+const helmet = require('helmet');
 
 
 
 
 const app = express();
 app.use(cors());
+app.use(helmet());
 
 // Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,14 +46,10 @@ app.use((req, res) => {
   res.status(404).send('404 not found...');
 });
 
-// let s3 = new aws.S3({
-//   accessKeyId: process.env.S3_USER,
-//   secretAccessKey: process.env.S3_PASSWOR
-// });
-
-
 // connects our backend code with the database
-mongoose.connect('mongodb+srv://:master1@cluster0.z6bd2.mongodb.net/NewWaveFestival?retryWrites=true&w=majority', { useNewUrlParser: true });
+(process.env.NODE_ENV === 'production')
+? mongoose.connect(`mongodb+srv://${process.env.username}:${process.env.password}@cluster0.z6bd2.mongodb.net/NewWaveFestival?retryWrites=true&w=majority`)
+: mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 
 
